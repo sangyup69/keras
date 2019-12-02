@@ -14,7 +14,6 @@ model.add(Dense(1))
 
 model.summary()
 
-
 # model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 # model.fit(x,y, epochs=100)  # batch_size 삭제
 
@@ -36,6 +35,3 @@ model.summary()
 # _________________________________________________________________
 # dense_3 (Dense)              (None, 1)                 4
 # =================================================================
-# Total params: 32
-# Trainable params: 32
-# Non-trainable params: 0
