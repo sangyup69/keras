@@ -11,17 +11,17 @@ y_test = np.array([11,12,13,14,15,16,17,18,19,20])
 
 model = Sequential()
 model.add(Dense(500, input_shape=(1, ), activation='relu'))
-model.add(Dense(5000))
-model.add(Dense(5000))
-model.add(Dense(5000))
-model.add(Dense(5000))
-model.add(Dense(5000))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
 model.add(Dense(1))
 
 model.summary()
 
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
-model.fit(x_train,y_train, epochs=100, batch_size=1)
+model.fit(x_train,y_train, epochs=1000, batch_size=1)
 
 loss, mse = model.evaluate(x_test, y_test, batch_size=1)
 print('mse :', mse)
