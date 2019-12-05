@@ -4,20 +4,12 @@ import numpy as np
 # x = np.array(range(1,101))
 # y = np.array(range(1,101))
 x = np.array([range(1,101), range(101,201)])  
-y = np.array([range(1,101), range(101,201)])
+y = np.array([range(201,301)])
 print(x.shape)   # (2,100)
 x = np.transpose(x)   
 y = np.transpose(y)   
 print(x.shape)   # (100,2)
 
-'''
-x_train = x[:60]  
-x_val = x[60:80]
-x_test = x[80:]
-y_train = y[:60]  # 1-60
-y_val = y[60:80]  # 61-80
-y_test = y[80:]   # 81-100
-'''
 
 from  sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=66, test_size=0.4, shuffle=False)
@@ -36,7 +28,7 @@ model.add(Dense(100, input_shape=(2,), activation='relu'))   # 행은 무시 (10
 model.add(Dense(70))
 model.add(Dense(50))
 model.add(Dense(10))
-model.add(Dense(2))  # output 2개   y = np.array([range(1,101), range(101,201)])
+model.add(Dense(1))   # output 1개    y = np.array([range(201,301)])
 
 # model.summary()
 
@@ -47,14 +39,17 @@ model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 # model.fit(x_train,y_train, epochs=100, batch_size=1)
 model.fit(x_train,y_train, epochs=100, batch_size=1, validation_data=(x_val, y_val))
 
-loss, mse = model.evaluate(x_test, y_test, batch_size=1)
-print('mse :', mse)
-print('loss :', loss)
+#4. 평가예측
+loss, acc = model.evaluate(x_test, y_test, batch_size=1)
+print('acc :', acc)
 
-
-y_predict = model.predict(x_test)
+aaa = np.array([range(101,103), range(201,203)])
+aaa = np.transpose(aaa)
+y_predict = model.predict(aaa)
+# y_predict = model.predict(x_test)
 print(y_predict)
 
+'''
 # rmse 
 from  sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict):
@@ -66,7 +61,7 @@ print("RMSE : ", RMSE(y_test, y_predict))
 from  sklearn.metrics import r2_score
 r2_y_predict = r2_score(y_test, y_predict)
 print("R2 : ", r2_y_predict)
-
+'''
 
 
 

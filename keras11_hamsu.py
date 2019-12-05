@@ -40,7 +40,7 @@ xx = Dense(5)(xx)
 xx = Dense(5)(xx)
 output1 = Dense(1)(xx)
 
-model =  Model(inputs=input1, outputs=output1)
+model = Model(inputs=input1, outputs=output1)   #####
 model.summary()
 
 
