@@ -6,12 +6,18 @@ y1 = np.array([range(501,601), range(711,811), range(100)])
 
 x2 = np.array([range(100,200), range(311,411), range(100,200)])
 y2 = np.array([range(501,601), range(711,811), range(100)])
-
+xk = np.append(x1,x2)
+print(xk.shape)
+print(xk)
 x1 = np.transpose(x1)
 y1 = np.transpose(y1)
 x2 = np.transpose(x2)
 y2 = np.transpose(y2)
+xk1 = np.append(x1,x2)
+print(xk1.shape)
+print(xk1)
 
+'''
 print(x1.shape) # (100, 3)
 print(y1.shape) # (100, 3)
 print(x2.shape) # (100, 3)
@@ -69,7 +75,7 @@ loss, mse = model.evaluate([x1_test, x2_test], [y1_test, y2_test], batch_size=1)
 print('mse :', mse)
 print('loss :', loss)
 
-'''
+
 y_predict = model.predict([x1_test, x2_test])
 print(y_predict)
 
