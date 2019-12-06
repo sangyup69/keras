@@ -58,19 +58,19 @@ output2 = Dense(3)(output2)
 model = Model(inputs=[input1, input2], outputs=[output1, output2])   #####
 model.summary()
 
-'''
+
 # 3. training
 # model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 # model.fit(x_train,y_train, epochs=100, batch_size=1)
-model.fit(x_train,y_train, epochs=100, batch_size=1, validation_data=(x_val, y_val))
+model.fit([x1_train, x2_train], [y1_train, y2_train], epochs=10, batch_size=1, validation_data=([x1_val, x2_val], [y1_val, y2_val]))
 
-loss, mse = model.evaluate(x_test, y_test, batch_size=1)
+loss, mse = model.evaluate([x1_test, x2_test], [y1_test, y2_test], batch_size=1)
 print('mse :', mse)
 print('loss :', loss)
 
-
-y_predict = model.predict(x_test)
+'''
+y_predict = model.predict([x1_test, x2_test])
 print(y_predict)
 
 # rmse 
@@ -85,3 +85,5 @@ from  sklearn.metrics import r2_score
 r2_y_predict = r2_score(y_test, y_predict)
 print("R2 : ", r2_y_predict)
 '''
+
+# https://hwiyong.tistory.com/100
