@@ -110,3 +110,4 @@ print("R2 : ", (r2_y1_predict + r2_y2_predict + r2_y3_predict)/3)
 
 # https://hwiyong.tistory.com/100
 # https://keras.io/
+# CNN, RNN
