@@ -1,4 +1,4 @@
-# 모델링할 경우 lstm을 2~3개 이상 사용하면 효율이 떨어짐
+# 모델링할 경우 lstm을 2개 이상 사용하면 효율이
 from numpy import array
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
