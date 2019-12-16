@@ -80,3 +80,5 @@ print("R2 : ", (r2_y1_predict + r2_y2_predict)/2)
 # https://hwiyong.tistory.com/100
 # https://keras.io/
 # CNN, RNN
+
+# 회귀모델, 분류모델
