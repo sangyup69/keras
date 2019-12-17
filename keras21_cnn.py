@@ -12,8 +12,7 @@ kernel_size = (3,3)
 
 from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 model = Sequential()
-# model.add(Conv2D(7, (2,2), padding='same', input_shape=(28,28,1)))  
-model.add(Conv2D(7, (2,2), input_shape=(28,28,1)))  
+model.add(Conv2D(7, (2,2), padding='same', input_shape=(28,28,1)))  
 # 7 : 첫번째 layer의 output node수
 # (2,2) : 2*2 size로 전체데이터를 중복해서 자르겠다는 의미
 # input_shape=(가로,세로,feature)
@@ -26,5 +25,17 @@ model.add(Flatten())   # 2차원의 데이터를 1차원 데이터로 만듦 -> 
 model.add(Dense(10))
 model.add(Dense(1))
 
-
 model.summary()
+
+# model.add(Conv2D(7, (2,2), input_shape=(28,28,1))) 
+# _________________________________________________________________
+# Layer (type)                 Output Shape              Param #
+# =================================================================
+# conv2d_1 (Conv2D)            (None, 27, 27, 7)         35           28*28 이미지를 2*2로 중복해서 추출하면 27*27 만큼의 조각이미지가 나옴
+# _________________________________________________________________
+# flatten_1 (Flatten)          (None, 5103)              0            =27*27*7
+# _________________________________________________________________
+# dense_1 (Dense)              (None, 10)                51040
+# _________________________________________________________________
+# dense_2 (Dense)              (None, 1)                 11
+# =================================================================
