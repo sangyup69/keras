@@ -28,7 +28,7 @@ from  sklearn.model_selection import train_test_split
 x1, x2, y1, y2 = train_test_split(X_train, Y_train, random_state=66, test_size=0.5, shuffle=False)
 x1_test, x2_test, y1_test, y2_test = train_test_split(X_test, Y_test, random_state=66, test_size=0.5, shuffle=False)
 
-# ensemble로 convolution 신경망의 modeling
+# ensemble로 convolution(cnn) 신경망의 modeling
 input1 = Input(shape=(28,28,1))
 dense1 = Conv2D(32, kernel_size=(3,3), activation='relu')(input1)
 dense2 = MaxPooling2D(pool_size=2)(dense1)
@@ -64,5 +64,6 @@ history = model.fit([x1,x2], [y1,y2], validation_data=([x1_test, x2_test], [y1_t
                     epochs=3, batch_size=200, verbose=1,
                     callbacks=[early_stopping_callback])
 
+print('\n loss :%.4f, Accuracy : %.4f' % (model.evaluate([x1_test, x2_test], [y1_test, y2_test]))) # [0] : loss,  [1] : accuracy
 
 # kingkeras@naver.com 윤영선 교수
