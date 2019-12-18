@@ -14,7 +14,7 @@ x = x.reshape((x.shape[0], x.shape[1], 1))   # (10,3) -> (10,3,1)
 
 #2. 모델구성
 model = Sequential()
-model.add(LSTM(100, activation='relu', input_shape=(3,1), return_sequences=True)) # lstm에서 output shape의 dimension을 하나 늘려주기 위해 return_sequences=True 옵션을 사용한다.
+model.add(LSTM(100, activation='relu', input_shape=(3,1), return_sequences=True)) # lstm 에서 output shape의 dimension을 하나 늘려주기 위해 return_sequences=True 옵션을 사용한다.
 model.add(LSTM(200, activation='relu', return_sequences=True)) 
 model.add(LSTM(300, activation='relu', return_sequences=True)) 
 model.add(LSTM(400, activation='relu', return_sequences=True)) 
