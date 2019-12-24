@@ -7,8 +7,29 @@ from keras.models import Sequential
 from keras.layers import Dense, LSTM
 
 #1. 데이터
-x = array([[1,2,3], [2,3,4], [3,4,5], [4,5,6]])
-y = array([4,5,6,7])
+import openpyxl
+filename = "c:\Temp\exchange.xlsx"
+book = openpyxl.load_workbook(filename)
+sheet = book.worksheets[0]
+
+xs = []
+ys = []
+for row in sheet.rows:
+    # data.append([
+    #     row[0].value,
+    #     row[1].value,
+    #     row[2].value,
+    #     row[3].value,
+    #     row[4].value
+    # ])
+    ys.append(row[1].value)    
+    xs.append([row[2].value, row[3].value, row[4].value])   
+       
+x = array(xs)
+y = array(ys)
+
+# x = array([[1,2,3], [2,3,4], [3,4,5], [4,5,6]])
+# y = array([4,5,6,7])
 # print(x)
 print("x.shape : ", x.shape)
 print("y.shape : ", y.shape)
@@ -19,22 +40,22 @@ print("y.shape : ", y.shape)
 # 456  7
 
 x = x.reshape((x.shape[0], x.shape[1], 1))   # (4,3) -> (4,3,1)
-# print("x.shape : ", x.shape)   # (4, 3, 1)
+print("x.shape : ", x.shape)   # (4, 3, 1)
 # print(x)
 
 #2. 모델구성
 model = Sequential()
 model.add(LSTM(300, activation='relu', input_shape=(3,1)))   # (행,3,1) input_shape에서 행은 무시
-model.add(Dense(1000))                                         # 1 : 몇개씩 잘라서 작업할 것인가, 작업을 위한 cut size
-model.add(Dense(500))
+model.add(Dense(100))                                         # 1 : 몇개씩 잘라서 작업할 것인가, 작업을 위한 cut size
+model.add(Dense(50))
 model.add(Dense(1))
-# model.summary()
+model.summary()
 
 #3. 실행
 model.compile(optimizer='adam', loss='mse')
 model.fit(x, y, epochs=100)
 
-x_input = array([6,7,8])
+x_input = array([1.1086,1.294,109.34])
 x_input = x_input.reshape((1,3,1))
 
 yhat = model.predict(x_input)

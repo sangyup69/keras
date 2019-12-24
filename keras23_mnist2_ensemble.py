@@ -61,9 +61,9 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=10)
 # 모델 실행
 history = model.fit([x1,x2], [y1,y2], validation_data=([x1_test, x2_test], [y1_test, y2_test]),
-                    epochs=3, batch_size=200, verbose=1,
+                    epochs=3, batch_size=200, verbose=0,
                     callbacks=[early_stopping_callback])
 
-print('\n loss :%.4f, Accuracy : %.4f' % (model.evaluate([x1_test, x2_test], [y1_test, y2_test]))) # [0] : loss,  [1] : accuracy
+print('\n EVALUATE : ', (model.evaluate([x1_test, x2_test], [y1_test, y2_test])[:])) # [0] : loss,  [1] : accuracy
 
 # kingkeras@naver.com 윤영선 교수
