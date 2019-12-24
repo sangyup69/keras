@@ -5,6 +5,7 @@
 from numpy import array
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
+from keras.callbacks import EarlyStopping
 
 #1. 데이터
 import openpyxl
@@ -21,32 +22,30 @@ for row in sheet.rows:
 x = array(ys)
 y = array(xs)
 
-# x = array([[1,2,3], [2,3,4], [3,4,5], [4,5,6]])
-# y = array([4,5,6,7])
 print("x.shape : ", x.shape)
 print("y.shape : ", y.shape)
 
-x = x.reshape((x.shape[0], 1, 1))   # (4,3) -> (4,3,1)
-print("x.shape : ", x.shape)   # (4, 3, 1)
+x = x.reshape((x.shape[0], 1, 1)) 
+print("x.shape : ", x.shape)  
 # print(x)
 
 #2. 모델구성
 model = Sequential()
-model.add(LSTM(30, activation='relu', input_shape=(1,1)))
-model.add(Dense(100))                                     
+model.add(LSTM(1, activation='relu', input_shape=(1,1)))
+model.add(Dense(150))
 model.add(Dense(50))
 model.add(Dense(3))
 model.summary()
 
 #3. 실행
-from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='acc', patience=30, mode='auto')
 model.compile(optimizer='adam', loss='mse')
-model.fit(x, y, epochs=100, batch_size=1, callbacks=[early_stopping])
+model.fit(x, y, epochs=10, batch_size=1, callbacks=[early_stopping])
 
-x_input = array(1164.5)
+x_input = array(1163.9)  # [1.1086 1.2940 109.34]
 x_input = x_input.reshape((1,1,1))
 
 yhat = model.predict(x_input)
 print(yhat)
 
+# [[  1.1777534   1.180474  106.01982  ]]
