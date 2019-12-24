@@ -25,13 +25,14 @@ y = array(xs)
 print("x.shape : ", x.shape)
 print("y.shape : ", y.shape)
 
-x = x.reshape((x.shape[0], 1, 1)) 
+x = x.reshape((x.shape[0], 1, 1))   # LSTM 모델일 경우 사용
 print("x.shape : ", x.shape)  
 # print(x)
 
 #2. 모델구성
 model = Sequential()
-model.add(LSTM(1, activation='relu', input_shape=(1,1)))
+# model.add(Dense(10, input_shape=(1, ), activation='relu'))   # DNN
+model.add(LSTM(1, activation='relu', input_shape=(1,1)))    # LSTM
 model.add(Dense(150))
 model.add(Dense(50))
 model.add(Dense(3))
@@ -43,7 +44,8 @@ model.compile(optimizer='adam', loss='mse')
 model.fit(x, y, epochs=10, batch_size=1, callbacks=[early_stopping])
 
 x_input = array(1163.9)  # [1.1086 1.2940 109.34]
-x_input = x_input.reshape((1,1,1))
+x_input = x_input.reshape((1,1,1))   # LSTM 모델일 경우 사용
+# x_input = x_input.reshape((1, 1))   # DNN 모델일 경우 사용
 
 yhat = model.predict(x_input)
 print(yhat)
